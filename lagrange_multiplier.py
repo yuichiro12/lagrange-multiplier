@@ -34,13 +34,13 @@ class LagrangeMultiplier:
         return x_solver.run(jnp.array(p0))
 
 
-def obj(x): return (x[0] - 1)**2 + (x[1] - 3)**2
+def obj(x): return (x[0] - 1)**2 + (x[1])**2
 
 
-def con(x): return (x[0] - 1)**2 * x[1]**2 - x[1]
+def con(x): return x[0] + x[1] - 1
 
 
 solver = LagrangeMultiplier(obj, con)
 res = solver.solve(jnp.array([0., 1., 1.]))
 
-print(res.state)
+print(res.params)
